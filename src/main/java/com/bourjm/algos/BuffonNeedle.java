@@ -4,10 +4,15 @@ import org.apache.commons.math3.distribution.UniformRealDistribution;
 
 public class BuffonNeedle {
 
+	/*
+	 * This class is a simulation of Buffon needle's problem to empirically
+	 * estimate Pi https://en.wikipedia.org/wiki/Buffon%27s_needle
+	 */
+
 	public static void main(String[] args) {
-		estimatePi(2,1,10000000);
+		estimatePi(2, 1, 10000000);
 	}
-	
+
 	private static double getProbability(double d, double l, double iterations) {
 		assert (d > l);
 		UniformRealDistribution thetaURD = new UniformRealDistribution(0,
