@@ -4,7 +4,6 @@ import java.util.Iterator;
 
 public class ArrayQueue<T> implements Iterable<T> {
 
-	// this comment is added with intellij community IDEA
 	private T[] a = (T[]) new Object[1]; // the ugly cast
 	private int N, T = 0;
 
