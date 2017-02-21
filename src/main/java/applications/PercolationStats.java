@@ -1,6 +1,5 @@
 package applications;
 
-import com.sun.xml.internal.bind.v2.runtime.output.SAXOutput;
 import edu.princeton.cs.introcs.StdRandom;
 import edu.princeton.cs.introcs.StdStats;
 
@@ -9,9 +8,16 @@ import edu.princeton.cs.introcs.StdStats;
  */
 public class PercolationStats {
 
-    private double[] scores;
-    private final int trials;
+    private double[] scores; // Ratio of open sites to total sites per trial
+    private final int trials; // number of simulation trials
 
+    /**
+     * Monte-Carlo simulation of the percolation problem. Open random sites repeatedly until
+     * the system peculates.
+     *
+     * @param n      grid size
+     * @param trials number of simulation trials
+     */
     public PercolationStats(int n, int trials) {
         this.trials = trials;
         scores = new double[trials];
@@ -24,24 +30,46 @@ public class PercolationStats {
         }
     }
 
+    /**
+     * The average site vacancy probability
+     *
+     * @return average site vacancy probability
+     */
     public double mean() {
         return StdStats.mean(scores);
     }
 
+    /**
+     * Standard deviation of site vacancy probability
+     *
+     * @return Standard deviation of site vacancy probability
+     */
     public double stddev() {
         return StdStats.stddev(scores);
     }
 
+    /**
+     * Lower 95%-estimate of site vacancy probability
+     *
+     * @return Lower 95%-estimate of site vacancy probability
+     */
     public double confidenceLo() {
         return mean() - ((1.96 * stddev()) / Math.sqrt(trials));
     }
 
+    /**
+     * Upper 95%-estimate of site vacancy probability
+     *
+     * @return Upper 95%-estimate of site vacancy probability
+     */
     public double confidenceHi() {
         return mean() + ((1.96 * stddev()) / Math.sqrt(trials));
     }
 
     public static void main(String[] args) {
-        PercolationStats stats = new PercolationStats(200, 10000);
+        final int gridSize = Integer.parseInt(args[0]);
+        final int trials = Integer.parseInt(args[1]);
+        PercolationStats stats = new PercolationStats(gridSize, trials);
         System.out.println("mean: " + stats.mean());
         System.out.println("Stddev: " + stats.stddev());
         System.out.println("95% confidence interval [" + stats.confidenceLo() + "," + stats.confidenceHi() + "]");
