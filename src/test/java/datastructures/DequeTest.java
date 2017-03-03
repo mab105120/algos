@@ -1,13 +1,12 @@
 package datastructures;
 
 import org.junit.Test;
+import sorting.SortTest;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * Created by Moe on 2/20/17.
@@ -73,4 +72,30 @@ public class DequeTest {
         Deque<String> d = new Deque<>();
         d.addFirst(null);
     }
+
+    @Test (expected = NoSuchElementException.class)
+    public void callNextWhenIteratorIsDone() {
+        Deque<String> d = new Deque<>();
+        d.addFirst("e");
+        d.addFirst("d");
+        d.addFirst("c");
+        d.addFirst("b");
+        d.addFirst("a");
+        Iterator<String> iterator = d.iterator();
+        for(int i = 0; i < 6; i++) iterator.next();
+    }
+
+    @Test
+    public void testOrder() {
+        Deque<String> d = new Deque<>();
+        d.addFirst("e");
+        d.addFirst("d");
+        d.addFirst("c");
+        d.addFirst("b");
+        d.addFirst("a");
+        String[] output = new String[5];
+        for(int i = 0; i < 5; i++) output[i] = d.removeFirst();
+        assertTrue(SortTest.isSorted(output));
+    }
+
 }

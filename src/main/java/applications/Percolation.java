@@ -1,6 +1,6 @@
 package applications;
 
-import com.bourjm.algos.WeightedQuickUnion;
+import edu.princeton.cs.algorithms.WeightedQuickUnionUF;
 
 /**
  * Created by Moe on 2/18/17.
@@ -8,9 +8,11 @@ import com.bourjm.algos.WeightedQuickUnion;
 public class Percolation {
 
     private int[] status; // holds the status of each site (0 = blocked, non-0 = open)
-    private WeightedQuickUnion sites; // quick-union to track which sites are connected
+    private WeightedQuickUnionUF sites; // quick-union to track which sites are connected
     private final int n; // grid dimension (n x n)
     private int openSites; // number of open sites in the grid
+    private final int TOP_MASTER_SITE;
+    private final int BOTOTM_MASTER_SITE;
 
     /**
      * Creates a percolation grid (n x n) with two master sites: one of top of the grid, another at the bottom.
@@ -21,11 +23,13 @@ public class Percolation {
      * @param n grid dimension
      */
     public Percolation(int n) {
-        if (n < 0) throw new IllegalArgumentException();
+        if (n <= 0) throw new IllegalArgumentException();
+        TOP_MASTER_SITE = 0;
+        BOTOTM_MASTER_SITE = (n * n) + 1;
         this.n = n;
         int numberOfSites = n * n + 2; // Grid sites + 2 "master" sites
         this.status = new int[numberOfSites];
-        sites = new WeightedQuickUnion(numberOfSites);
+        sites = new WeightedQuickUnionUF(numberOfSites);
         connectMasterSites();
     }
 
@@ -66,7 +70,7 @@ public class Percolation {
      * @return True if site is connected to top row, false otherwise
      */
     public boolean isFull(int row, int col) {
-        return sites.isConnected(0, getSiteId(row, col));
+        return isOpen(row, col) && sites.connected(TOP_MASTER_SITE, getSiteId(row, col));
     }
 
     /**
@@ -84,11 +88,11 @@ public class Percolation {
      * @return True is the system percolates, false otherwises
      */
     public boolean percolates() {
-        return sites.isConnected(0, (n * n) + 1);
+        return sites.connected(TOP_MASTER_SITE, BOTOTM_MASTER_SITE);
     }
 
     private void connectMasterSites() {
-        for (int i = 1; i <= n; i++)
+        for (int i = getSiteId(1, 1); i <= getSiteId(1, n); i++)
             sites.union(0, i);
         for (int i = getSiteId(n, 1); i <= getSiteId(n, n); i++)
             sites.union((n * n) + 1, i);

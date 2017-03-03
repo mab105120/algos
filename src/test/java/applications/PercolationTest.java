@@ -10,6 +10,7 @@ import java.util.Arrays;
 import java.util.Collection;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 /**
  * Created by Moe on 2/19/17.
@@ -49,8 +50,17 @@ public class PercolationTest {
         In in = new In(new File(FILE_PATH + this.filename));
         int[] input = in.readAllInts();
         Percolation p = new Percolation(input[0]);
+        assertFalse(p.percolates());
         for (int i = 1; i < input.length; i = i + 2)
             p.open(input[i], input[i + 1]);
         assertEquals(expected, p.percolates());
+    }
+
+
+
+    @Test
+    public void test() {
+        Percolation p = new Percolation(10);
+        System.out.println(p.percolates());
     }
 }
