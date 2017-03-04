@@ -1,3 +1,4 @@
 language: java
 sudo: false
+osx_image: xcode8
 script: mvn package
