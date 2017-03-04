@@ -1,4 +1,5 @@
 language: java
 sudo: false
-osx_image: xcode8
+jdk:
+  - oraclejdk8
 script: mvn package
