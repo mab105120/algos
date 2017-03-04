@@ -1,8 +1,12 @@
 package sorting;
 
-import static org.junit.Assert.*;
-
+import edu.princeton.cs.introcs.In;
 import org.junit.Test;
+
+import java.io.File;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class SortTest {
 
@@ -29,4 +33,10 @@ public class SortTest {
 			if (Sort.less(a[i], a[i-1])) return false;
 		return true;
 	}
+
+	public static String[] readLetters() {
+		In in = new In(new File("src/test/resource/letters.txt"));
+		return in.readAllStrings();
+	}
+
 }
