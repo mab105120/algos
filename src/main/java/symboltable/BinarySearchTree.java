@@ -33,7 +33,6 @@ public class BinarySearchTree<K extends Comparable<K>, V> {
 	private void preOrder(Node n) {
 		if (n == null)
 			return;
-		System.out.println(n.key);
 		preOrder(n.left);
 		preOrder(n.right);
 	}
@@ -45,7 +44,6 @@ public class BinarySearchTree<K extends Comparable<K>, V> {
 	private void inOrder(Node n) {
 		if (n != null) {
 			inOrder(n.left);
-			System.out.println(n.key);
 			inOrder(n.right);
 		}
 	}
@@ -55,7 +53,6 @@ public class BinarySearchTree<K extends Comparable<K>, V> {
 		q.enqueue(root);
 		while (!q.isEmpty()) {
 			Node front = q.front();
-			System.out.println(front.key);
 			if (front.left != null)
 				q.enqueue(front.left);
 			if (front.right != null)

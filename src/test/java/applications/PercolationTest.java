@@ -55,12 +55,4 @@ public class PercolationTest {
             p.open(input[i], input[i + 1]);
         assertEquals(expected, p.percolates());
     }
-
-
-
-    @Test
-    public void test() {
-        Percolation p = new Percolation(10);
-        System.out.println(p.percolates());
-    }
 }

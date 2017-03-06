@@ -15,7 +15,6 @@ public class BinarySearchTreeTest {
 	 st.insert(9, "Nine");
 	 st.insert(7, "Seven");
 	 st.insert(6, "Six");
-	 System.out.println(st.get(2));
 	 }
 	 
 	 @Test
