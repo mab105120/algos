@@ -1,14 +1,13 @@
 package sorting;
 
+import java.util.Comparator;
+
 public class Sort {
 
-	public static <T> boolean less(Comparable<T> a, T b) {
-		return a.compareTo(b) < 0;
+	public static <T> boolean less(Comparator<T> c, T a, T b) {
+		return c.compare(a, b) < 0;
 	}
 
-	public static <T extends Comparable<T>> boolean lessThanOrEq(T a, T b) {
-		return a.compareTo(b) <= 0;
-	}
 
 	public static <T> void exchange(T[] a, int i, int j) {
 		T swap = a[i];

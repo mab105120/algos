@@ -1,15 +1,15 @@
 package datastructures;
 
-import static org.junit.Assert.*;
-
 import org.junit.Test;
+
+import static org.junit.Assert.assertTrue;
 
 public class UnorderedMinPQTest {
 
 	@Test
 	public void minPqWithArray() {
 		Integer[] a = new Integer[] { 0, 1, 2, 5, 8, 4, 2, 6, 8 };
-		UnorderedMinPQ<Integer> pq = new UnorderedMinPQ<>(a);
+		UnorderedMinPQ<Integer> pq = new UnorderedMinPQ<>(Integer::compare, a);
 		assertTrue(pq.removeMin() == 0);
 		pq.insert(-2);
 		pq.insert(-4);
@@ -21,7 +21,7 @@ public class UnorderedMinPQTest {
 
 	@Test
 	public void minPqWithInsertingItems() {
-		UnorderedMinPQ<Integer> pq = new UnorderedMinPQ<Integer>();
+		UnorderedMinPQ<Integer> pq = new UnorderedMinPQ<>(Integer::compare);
 		pq.insert(1);
 		pq.insert(2);
 		pq.insert(4);

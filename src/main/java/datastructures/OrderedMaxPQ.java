@@ -3,14 +3,18 @@ package datastructures;
 import sorting.QuickSort;
 import sorting.Sort;
 
-public class OrderedMaxPQ<T extends Comparable<T>> {
+import java.util.Comparator;
+
+public class OrderedMaxPQ<T> {
 
 	private T[] a;
 	private int N;
+	private Comparator<T> c;
 
-	public OrderedMaxPQ() {
+	public OrderedMaxPQ(Comparator<T> c) {
 		this.a = (T[]) new Comparable[1]; // the ugly cast
-		QuickSort.sort(a);
+		this.c = c;
+		QuickSort.sort(c, a);
 		this.N = 0;
 	}
 
@@ -19,7 +23,7 @@ public class OrderedMaxPQ<T extends Comparable<T>> {
 			resize(a.length * 2);
 		a[N++] = t;
 		for (int i = N - 1; i > 0; i--)
-			if (Sort.less(a[i], a[i - 1]))
+			if (Sort.less(c, a[i], a[i - 1]))
 				Sort.exchange(a, i, (i - 1));
 			else
 				break;

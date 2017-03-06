@@ -1,11 +1,13 @@
 package sorting;
 
+import java.util.Comparator;
+
 public class InsertionSort {
 
-	public static <T extends Comparable<T>> void sort(T[] a) {
+	public static <T> void sort(Comparator<T> c, T[]a) {
 		for (int i = 0; i < a.length; i++)
 			for (int j = i; j >= 1; j--)
-				if (Sort.less(a[j], a[j - 1]))
+				if (Sort.less(c, a[j], a[j - 1]))
 					Sort.exchange(a, j, j - 1);
 	}
 }

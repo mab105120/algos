@@ -3,6 +3,7 @@ package datastructures;
 import org.junit.Test;
 import sorting.SortTest;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -45,17 +46,17 @@ public class DequeTest {
         d.addFirst(0);
         int[] expected = new int[]{0, 5, 1, 4, 3, 2};
         int i = 0;
-        for(Integer j: d) assertEquals((int) j, expected[i++]);
+        for (Integer j : d) assertEquals((int) j, expected[i++]);
     }
 
-    @Test (expected = UnsupportedOperationException.class)
+    @Test(expected = UnsupportedOperationException.class)
     public void dequeRemoveElementInIteration() {
         Deque<String> d = new Deque<>();
         Iterator iterator = d.iterator();
         iterator.remove();
     }
 
-    @Test (expected = NoSuchElementException.class)
+    @Test(expected = NoSuchElementException.class)
     public void testRemoveNodeFromEmptyDeque() {
         Deque<String> d = new Deque<>();
         assertTrue(d.isEmpty());
@@ -67,13 +68,13 @@ public class DequeTest {
         d.removeFirst();
     }
 
-    @Test (expected = NullPointerException.class)
+    @Test(expected = NullPointerException.class)
     public void testAddInvalidInput() {
         Deque<String> d = new Deque<>();
         d.addFirst(null);
     }
 
-    @Test (expected = NoSuchElementException.class)
+    @Test(expected = NoSuchElementException.class)
     public void callNextWhenIteratorIsDone() {
         Deque<String> d = new Deque<>();
         d.addFirst("e");
@@ -82,7 +83,7 @@ public class DequeTest {
         d.addFirst("b");
         d.addFirst("a");
         Iterator<String> iterator = d.iterator();
-        for(int i = 0; i < 6; i++) iterator.next();
+        for (int i = 0; i < 6; i++) iterator.next();
     }
 
     @Test
@@ -94,8 +95,8 @@ public class DequeTest {
         d.addFirst("b");
         d.addFirst("a");
         String[] output = new String[5];
-        for(int i = 0; i < 5; i++) output[i] = d.removeFirst();
-        assertTrue(SortTest.isSorted(output));
+        for (int i = 0; i < 5; i++) output[i] = d.removeFirst();
+        assertTrue(SortTest.isSorted(Comparator.naturalOrder(), output));
     }
 
 }

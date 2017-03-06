@@ -4,7 +4,8 @@ import edu.princeton.cs.introcs.In;
 import org.junit.Test;
 
 import java.io.File;
-import java.util.function.Consumer;
+import java.util.Comparator;
+import java.util.function.BiConsumer;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -13,12 +14,12 @@ public class SortTest {
 
     @Test
     public void lessTest() {
-        assertTrue(Sort.less(1, 2));
+        assertTrue(Sort.less(Comparator.naturalOrder(), 1, 2));
     }
 
     @Test
     public void equalItems() {
-        assertFalse(Sort.less(1, 1));
+        assertFalse(Sort.less(Comparator.naturalOrder(), 1, 1));
     }
 
     @Test
@@ -29,9 +30,9 @@ public class SortTest {
         assertTrue(i[5] == 5);
     }
 
-    public static <T extends Comparable<T>> boolean isSorted(T[] a) {
+    public static <T> boolean isSorted(Comparator<T> c, T[] a) {
         for (int i = 1; i < a.length; i++)
-            if (Sort.less(a[i], a[i - 1])) return false;
+            if (Sort.less(c, a[i], a[i - 1])) return false;
         return true;
     }
 
@@ -43,16 +44,16 @@ public class SortTest {
     @Test
     public void sort() {
         String[] s = readLetters();
-        sort(s, InsertionSort::sort);
-        sort(s, SelectionSort::sort);
-        sort(s, QuickSort::sort);
-        sort(s, MergeSort::sort);
-        sort(s, ShellSort::sort);
+        sort(s, Comparator.naturalOrder(), InsertionSort::sort);
+        sort(s, Comparator.naturalOrder(), SelectionSort::sort);
+        sort(s, Comparator.naturalOrder(), QuickSort::sort);
+        sort(s, Comparator.naturalOrder(), MergeSort::sort);
+        sort(s, Comparator.naturalOrder(), ShellSort::sort);
     }
 
-    private static <T extends Comparable<T>> void sort(T[] t, Consumer<T[]> c) {
-        c.accept(t);
-        assertTrue(isSorted(t));
+    private static <T> void sort(T[] t, Comparator<T> p, BiConsumer<Comparator<T>, T[]> c) {
+        c.accept(p, t);
+        assertTrue(isSorted(p, t));
     }
 
 }

@@ -1,16 +1,15 @@
 package sorting;
 
-import static org.junit.Assert.*;
-
+import datastructures.OrderedMaxPQ;
 import org.junit.Test;
 
-import datastructures.OrderedMaxPQ;
+import static org.junit.Assert.assertTrue;
 
 public class OrderedMaxPQTest {
 
 	@Test
 	public void minPq() {
-		OrderedMaxPQ<Integer> pq = new OrderedMaxPQ<>();
+		OrderedMaxPQ<Integer> pq = new OrderedMaxPQ<>(Integer::compare);
 		pq.insert(1);
 		pq.insert(5);
 		pq.insert(0);
