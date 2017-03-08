@@ -20,8 +20,8 @@ public class MergeSort {
 		}
 	}
 
-	public static <T extends Comparable<T>> void sort(Comparator<T> c, T[] t) {
-		T[] aux = (T[]) new Comparable[t.length]; // the ugly cast
+	public static <T> void sort(Comparator<T> c, T[] t) {
+		T[] aux = (T[]) new Object[t.length]; // the ugly cast
 		int N = t.length;
 		for (int sz = 1; sz < N; sz = sz * 2) {
 			for (int lo = 0; lo < N - sz; lo = lo + 2 * sz) {
